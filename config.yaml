@@ -1,0 +1,82 @@
+# Hex configuration — edit to match your preferences.
+#
+# Google Calendar + Gmail access is handled by the MCP connectors you set up in
+# Claude settings, so there's no credentials or account setup here. This file
+# only tunes the assistant's behavior.
+
+# Your local timezone (IANA name).
+timezone: "America/New_York"
+
+# Which calendars to treat as "professional" vs. "personal" when Claude decides
+# what to include on your agenda. Use calendar IDs from `list_calendars`.
+# Anything not listed is still readable, but won't be tagged.
+calendar_tags:
+  work:
+    - "akemper@ncsu.edu"
+    - "ncsu.edu_h5vcht0g1skk33k9e8of4rd3k4@group.calendar.google.com"  # Kemper Lab Events
+  personal:
+    - "positronium@gmail.com"
+  # Read-only / informational calendars you want included on the agenda but not
+  # treated as hard-booked time.
+  informational:
+    - "en.usa#holiday@group.v.calendar.google.com"
+    - "farmingtonwoodses@wcpss.net"
+
+# Default working hours used when proposing new meeting times.
+working_hours:
+  monday:    { start: "09:00", end: "17:00" }
+  tuesday:   { start: "09:00", end: "17:00" }
+  wednesday: { start: "09:00", end: "17:00" }
+  thursday:  { start: "09:00", end: "17:00" }
+  friday:    { start: "09:00", end: "17:00" }
+  saturday:  null
+  sunday:    null
+
+# Blocks to leave free every day (e.g. lunch, focus time).
+daily_blocks:
+  - { name: "Lunch", start: "12:00", end: "13:00" }
+
+# Default meeting buffer (minutes) on either side of an event when proposing slots.
+default_buffer_minutes: 10
+
+# --- Reschedulability heuristics ---
+# Combined into a movability score per event: 0 = locked, 100 = very flexible.
+reschedule:
+  # Title keywords. If any LOCK keyword is present, event is hard-locked.
+  # If any FLEX keyword is present, event is soft-flexible.
+  lock_keywords:
+    - "board"
+    - "interview"
+    - "exam"
+    - "defense"
+    - "doctor"
+    - "appointment"
+    - "flight"
+    - "surgery"
+  flex_keywords:
+    - "[flex]"
+    - "focus"
+    - "work block"
+    - "catch up"
+    - "1:1"
+
+  # Google Calendar color IDs: 1=Lavender 2=Sage 3=Grape 4=Flamingo 5=Banana
+  # 6=Tangerine 7=Peacock 8=Graphite 9=Blueberry 10=Basil 11=Tomato
+  locked_color_ids: ["11"]   # Tomato (red)
+  flex_color_ids:   ["7"]    # Peacock (blue)
+
+  # Attendee rules.
+  solo_is_flex: true
+  organized_by_me_is_flex: true
+  organized_by_others_is_locked_default: true
+
+  # Even when rules say "flex," ALWAYS confirm with you before moving anything.
+  always_confirm_before_moving: true
+
+# --- Daily agenda ---
+agenda:
+  # Where to email the morning agenda (Claude creates a Gmail draft addressed here).
+  email_to: "akemper@ncsu.edu"
+  email_subject: "Your agenda — {date}"
+  include_documents: true
+  include_tomorrow_preview: true
