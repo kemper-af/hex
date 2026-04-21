@@ -62,6 +62,7 @@ Everything lives in [`config.yaml`](./config.yaml):
 | `cal_assistant/reschedule.py` | Movability classifier |
 | `cal_assistant/propose.py` | Slot finder with preference-aware scoring |
 | `cal_assistant/agenda.py` | Text + HTML renderers |
+| `tests/smoke_test.py` | Fast checks on the pure-Python logic (no Google calls) |
 
 ## Development
 
@@ -74,5 +75,7 @@ pip install -r requirements.txt --break-system-packages
 Run the smoke tests:
 
 ```
-python ../tests/smoke_test.py
+python tests/smoke_test.py
 ```
+
+Requires Python 3.10 or newer (uses `zoneinfo` and PEP 604 union syntax).
